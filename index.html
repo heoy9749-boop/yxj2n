@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>스킨핏 (SkinFit) | 맞춤형 피부타입 진단 & 화장품 성분 추천</title>
+  <!-- Google Fonts: Pretendard -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- CSS 연결 -->
+  <link rel="stylesheet" href="style.css">
+  <!-- JavaScript 연결 -->
+  <script defer src="script.js"></script>
+</head>
+<body>
+
+  <!-- 헤더 (연보라색 배경) -->
+  <header class="header">
+    <div class="header-container">
+      <div class="brand">
+        <span class="brand-logo">✨ SkinFit</span>
+        <span class="brand-sub">내 피부 맞춤 가이드</span>
+      </div>
+      <nav class="nav">
+        <a href="#test" class="nav-btn" id="navStartBtn">진단 시작하기</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 메인 콘텐츠 영역 -->
+  <main class="main-content">
+
+    <!-- 1. 인트로 랜딩 섹션 -->
+    <section id="introSection" class="intro-section">
+      <div class="container">
+        <div class="intro-card">
+          <span class="pill-badge">💜 1분 셀프 피부 진단</span>
+          <h1 class="main-title">
+            내 피부 타입 바로 알고,<br>
+            <span class="highlight-purple">찰떡 화장품 성분</span> 찾기
+          </h1>
+          <p class="intro-desc">
+            비싼 전문 센터나 피부과 방문 없이, 몇 가지 질문에 답하는 <strong>버튼 클릭만으로</strong>
+            유수분 밸런스와 민감도를 정밀 분석하고 꼭 맞는 화장품 성분을 추천해 드립니다.
+          </p>
+
+          <div class="info-badges">
+            <div class="info-item">
+              <span class="icon">⏱️</span>
+              <div>
+                <strong>소요 시간</strong>
+                <span>약 1분 (8문항)</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="icon">🎯</span>
+              <div>
+                <strong>정밀 진단</strong>
+                <span>6가지 세부 피부 유형</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="icon">🌿</span>
+              <div>
+                <strong>성분 가이드</strong>
+                <span>BEST 성분 & 주의 성분</span>
+              </div>
+            </div>
+          </div>
+
+          <button id="startTestBtn" class="btn btn-start">
+            <span>무료 피부 진단 시작하기</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 진단 퀴즈 섹션 (진행 중 표시) -->
+    <section id="quizSection" class="quiz-section hidden">
+      <div class="container">
+        <div class="quiz-card">
+          <!-- 상단 프로그레스 바 -->
+          <div class="progress-wrap">
+            <div class="progress-header">
+              <span id="questionCategory" class="category-tag">유수분 밸런스</span>
+              <span id="stepCounter" class="step-text">문항 1 / 8</span>
+            </div>
+            <div class="progress-bar">
+              <div id="progressFill" class="progress-fill"></div>
+            </div>
+          </div>
+
+          <!-- 질문 본문 -->
+          <div class="question-box">
+            <h2 id="questionText" class="question-title">질문 로딩 중...</h2>
+            <p id="questionHint" class="question-hint">평소 세안 직후 느껴지는 느낌을 솔직하게 선택해 주세요.</p>
+          </div>
+
+          <!-- 선택지 목록 -->
+          <div id="optionsList" class="options-grid">
+            <!-- JS 동적 생성 -->
+          </div>
+
+          <!-- 하단 네비게이션 (이전 버튼) -->
+          <div class="quiz-footer">
+            <button id="prevBtn" class="btn-prev hidden">← 이전 질문</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 로딩 및 분석 애니메이션 섹션 -->
+    <section id="loadingSection" class="loading-section hidden">
+      <div class="container">
+        <div class="loading-card">
+          <div class="spinner-lavender"></div>
+          <h2 class="loading-title">피부 데이터를 정밀 분석하고 있어요</h2>
+          <p id="loadingMsg" class="loading-desc">유분도, 속당김, 민감도 수치를 계산하는 중...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 진단 결과 섹션 -->
+    <section id="resultSection" class="result-section hidden">
+      <div class="container">
+        <!-- 결과 메인 카드 -->
+        <div class="result-main-card">
+          <div class="result-header">
+            <span id="resultBadge" class="result-type-badge">💧 속당김 탈출형</span>
+            <span class="result-pre">당신의 피부 타입은</span>
+            <h2 id="resultTitle" class="result-type-name">수분부족형 지성 (수부지)</h2>
+            <p id="resultDesc" class="result-type-desc">
+              겉은 번들거리는 유분이 돌지만, 피부 속은 수분이 부족해 세안 후나 오후에 속당김을 강하게 느끼는 피부 상태입니다.
+            </p>
+          </div>
+
+          <!-- 3차원 축 점수 분석 -->
+          <div class="score-analysis-wrap">
+            <h3 class="box-title">📊 나의 피부 밸런스 지수</h3>
+            <div class="score-cards-grid">
+              <div class="score-box">
+                <div class="score-info">
+                  <span>유분 지수</span>
+                  <strong id="sebumScoreText">7 / 10</strong>
+                </div>
+                <div class="mini-bar-bg"><div id="sebumScoreBar" class="mini-bar-fill oil"></div></div>
+                <p id="sebumComment" class="score-comment">T존 위주로 피지 분비가 왕성해요</p>
+              </div>
+
+              <div class="score-box">
+                <div class="score-info">
+                  <span>속당김 지수</span>
+                  <strong id="moistureScoreText">8 / 10</strong>
+                </div>
+                <div class="mini-bar-bg"><div id="moistureScoreBar" class="mini-bar-fill moist"></div></div>
+                <p id="moistureComment" class="score-comment">피부 속 수분 보충이 시급해요</p>
+              </div>
+
+              <div class="score-box">
+                <div class="score-info">
+                  <span>민감도 지수</span>
+                  <strong id="sensScoreText">4 / 10</strong>
+                </div>
+                <div class="mini-bar-bg"><div id="sensScoreBar" class="mini-bar-fill sens"></div></div>
+                <p id="sensComment" class="score-comment">자극에 비교적 무난하게 적응해요</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 추천 성분 & 주의 성분 -->
+          <div class="ingredients-dual-box">
+            <!-- 찰떡 성분 -->
+            <div class="ing-card good-card">
+              <div class="ing-header">
+                <span class="ing-icon">✨</span>
+                <div>
+                  <h3 class="ing-title">내 피부 찰떡 추천 성분 (BEST 3)</h3>
+                  <p class="ing-sub">화장품 전성분 표에서 이 성분들을 꼭 확인하세요!</p>
+                </div>
+              </div>
+              <ul id="goodIngredientsList" class="ing-list">
+                <!-- 동적 삽입 -->
+              </ul>
+            </div>
+
+            <!-- 주의 성분 -->
+            <div class="ing-card bad-card">
+              <div class="ing-header">
+                <span class="ing-icon">⚠️</span>
+                <div>
+                  <h3 class="ing-title">피해야 할 주의 성분 (WORST 2)</h3>
+                  <p class="ing-sub">모공 막힘이나 자극을 유발할 수 있으니 피해주세요.</p>
+                </div>
+              </div>
+              <ul id="badIngredientsList" class="ing-list">
+                <!-- 동적 삽입 -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- 맞춤 스킨케어 루틴 가이드 -->
+          <div class="routine-box">
+            <h3 class="box-title">🧴 맞춤형 스킨케어 솔루션 & 루틴 팁</h3>
+            <p id="routineTipText" class="routine-text">
+              가벼운 워터/젤 타입 토너로 수분을 여러 겹 레이어링하고, 오일감이 적은 산뜻한 젤 수분크림으로 얇은 수분막을 형성해 주세요.
+            </p>
+          </div>
+
+          <!-- 공유 및 다시하기 액션 버튼 -->
+          <div class="result-actions">
+            <button id="copyLinkBtn" class="btn btn-share">📋 진단 결과 링크 복사</button>
+            <button id="restartBtn" class="btn btn-restart">🔄 테스트 다시하기</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 6대 피부타입 안내 섹션 (하단 참고용) -->
+    <section class="guide-section">
+      <div class="container">
+        <h3 class="guide-title">💡 6가지 피부 타입 한눈에 보기</h3>
+        <div class="guide-grid">
+          <div class="guide-item">
+            <span class="badge dry">극건성/건성</span>
+            <h4>건성 (Dry)</h4>
+            <p>유수분 모두 부족하여 항상 당기고 각질이 자주 일어나는 타입</p>
+          </div>
+          <div class="guide-item">
+            <span class="badge oily">지성</span>
+            <h4>지성 (Oily)</h4>
+            <p>피지 분비가 왕성하여 번들거리고 모공과 블랙헤드가 발달한 타입</p>
+          </div>
+          <div class="guide-item">
+            <span class="badge dehy">수부지</span>
+            <h4>수분부족형 지성</h4>
+            <p>속은 바짝 당기는데 겉은 기름져 유수분 균형이 무너진 타입</p>
+          </div>
+          <div class="guide-item">
+            <span class="badge combo">복합성</span>
+            <h4>복합성 (Combination)</h4>
+            <p>T존(이마, 코)은 번들거리고 U존(볼)은 건조한 부위별 복합 타입</p>
+          </div>
+          <div class="guide-item">
+            <span class="badge sens-dry">민감건성</span>
+            <h4>민감성 건성</h4>
+            <p>건조함과 동시에 외부 자극이나 환경에 쉽게 붉어지고 따가운 타입</p>
+          </div>
+          <div class="guide-item">
+            <span class="badge sens-oily">민감지성</span>
+            <h4>민감성 지성/트러블</h4>
+            <p>과도한 피지와 함께 염증성 뾰루지, 여드름이 잦은 타입</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="footer-title">✨ SkinFit - 내 손안의 맞춤형 피부타입 진단기</p>
+      <p class="footer-note">본 테스트는 대중적인 유수분 밸런스 기준을 바탕으로 제작된 셀프 가이드이며, 전문적인 질환 치료는 전문의와 상담을 권장합니다.</p>
+      <p class="footer-copy">&copy; 2026 SkinFit. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

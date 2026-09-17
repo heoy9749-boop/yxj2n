@@ -1,0 +1,864 @@
+/* ==========================================================================
+   1. 연보라 테마 전역 변수 (Lavender Design System)
+   ========================================================================== */
+:root {
+  /* 연보라색 (Light Purple / Lavender) 팔레트 */
+  --lavender-main: #9370db;           /* 메인 연보라 (Medium Purple) */
+  --lavender-soft: #b8a3e8;           /* 부드러운 파스텔 연보라 */
+  --lavender-header: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%); /* 헤더 그라데이션 */
+  --lavender-light: #ede9fe;          /* 연보라 배경 1 */
+  --lavender-surface: #f5f3ff;        /* 연보라 배경 2 (가장 은은한 톤) */
+  --lavender-border: #ddd6fe;         /* 연보라 테두리 */
+  --lavender-dark: #6d28d9;           /* 짙은 보라 텍스트/포인트 */
+  --lavender-shadow: rgba(167, 139, 250, 0.2);
+
+  /* 기본 배경 및 텍스트 */
+  --bg-body: #faf8ff;
+  --bg-card: #ffffff;
+  --text-main: #2e1065;               /* 짙은 보라 계열 다크 텍스트 */
+  --text-body: #4c1d95;
+  --text-muted: #6b7280;
+  --text-white: #ffffff;
+
+  /* 성분/상태 컬러 */
+  --good-bg: #ecfdf5;
+  --good-border: #a7f3d0;
+  --good-text: #065f46;
+  --good-tag: #059669;
+
+  --bad-bg: #fff1f2;
+  --bad-border: #fecdd3;
+  --bad-text: #9f1239;
+  --bad-tag: #e11d48;
+
+  /* 그림자 및 모서리 */
+  --shadow-card: 0 10px 25px -5px var(--lavender-shadow), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  /* 폰트 및 트랜지션 */
+  --font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   2. 리셋 및 공통 스타일
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-body);
+  color: var(--text-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+   3. 헤더 (연보라색 배경 테마)
+   ========================================================================== */
+.header {
+  background: var(--lavender-header);
+  box-shadow: 0 4px 15px var(--lavender-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0.95rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.brand-logo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  text-shadow: 0 1px 3px rgba(109, 40, 217, 0.3);
+}
+
+.brand-sub {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.nav-btn {
+  background: #ffffff;
+  color: var(--lavender-dark);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.45rem 1rem;
+  border-radius: 30px;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(109, 40, 217, 0.15);
+  transition: var(--transition);
+}
+
+.nav-btn:hover {
+  background: var(--lavender-light);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   4. 인트로 랜딩 섹션
+   ========================================================================== */
+.intro-section {
+  padding: 3.5rem 0 2rem 0;
+}
+
+.intro-card {
+  background: var(--bg-card);
+  border: 1px solid var(--lavender-border);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.2rem;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+
+.pill-badge {
+  display: inline-block;
+  background: var(--lavender-light);
+  color: var(--lavender-dark);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.35rem 1rem;
+  border-radius: 30px;
+  margin-bottom: 1.25rem;
+}
+
+.main-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.35;
+  letter-spacing: -0.8px;
+  margin-bottom: 1.2rem;
+}
+
+.highlight-purple {
+  color: var(--lavender-dark);
+  position: relative;
+  display: inline-block;
+}
+
+.highlight-purple::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: rgba(196, 181, 253, 0.45);
+  z-index: -1;
+  border-radius: 4px;
+}
+
+.intro-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+}
+
+.info-badges {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.info-item {
+  background: var(--lavender-surface);
+  border: 1px solid var(--lavender-border);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: left;
+}
+
+.info-item .icon {
+  font-size: 1.75rem;
+}
+
+.info-item strong {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--lavender-dark);
+  font-weight: 700;
+}
+
+.info-item span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+}
+
+.btn-start {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+  color: #ffffff;
+  padding: 1.1rem 2.8rem;
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+  gap: 0.6rem;
+}
+
+.btn-start:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
+  background: linear-gradient(135deg, #7c3aed 0%, #9061f9 100%);
+}
+
+.btn-arrow {
+  font-size: 1.25rem;
+  transition: transform 0.2s ease;
+}
+
+.btn-start:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   5. 진단 퀴즈 섹션 (8문항 스텝)
+   ========================================================================== */
+.quiz-section {
+  padding: 3rem 0 2rem 0;
+}
+
+.quiz-card {
+  background: var(--bg-card);
+  border: 1px solid var(--lavender-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  box-shadow: var(--shadow-card);
+}
+
+.progress-wrap {
+  margin-bottom: 2rem;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.category-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--lavender-dark);
+  background: var(--lavender-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+
+.step-text {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--lavender-main);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--lavender-light);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #a78bfa 0%, #8b5cf6 100%);
+  width: 12.5%;
+  border-radius: 10px;
+  transition: width 0.3s ease-in-out;
+}
+
+.question-box {
+  margin-bottom: 2rem;
+}
+
+.question-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.45;
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.5px;
+}
+
+.question-hint {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.option-btn {
+  background: var(--lavender-surface);
+  border: 1.5px solid var(--lavender-border);
+  border-radius: var(--radius-md);
+  padding: 0.95rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-main);
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.option-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  flex: 1;
+}
+
+.option-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--lavender-light);
+  color: var(--lavender-dark);
+  font-size: 0.75rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: var(--transition);
+}
+
+.option-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.45;
+}
+
+.option-arrow {
+  font-size: 1.25rem;
+  color: var(--lavender-soft);
+  transition: transform 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.option-btn:hover {
+  background: #ffffff;
+  border-color: var(--lavender-main);
+  color: var(--lavender-dark);
+  transform: translateX(4px);
+  box-shadow: 0 4px 14px var(--lavender-shadow);
+}
+
+.option-btn:hover .option-num {
+  background: var(--lavender-main);
+  color: #ffffff;
+}
+
+.option-btn:hover .option-arrow {
+  color: var(--lavender-dark);
+  transform: translateX(3px);
+}
+
+.option-btn:active {
+  transform: scale(0.99);
+}
+
+.quiz-footer {
+  display: flex;
+  justify-content: flex-start;
+  border-top: 1px dashed var(--lavender-border);
+  padding-top: 1.25rem;
+}
+
+.btn-prev {
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.btn-prev:hover {
+  color: var(--lavender-dark);
+  background: var(--lavender-light);
+}
+
+/* ==========================================================================
+   6. 분석 연출 로딩 섹션
+   ========================================================================== */
+.loading-section {
+  padding: 5rem 0;
+}
+
+.loading-card {
+  background: var(--bg-card);
+  border: 1px solid var(--lavender-border);
+  border-radius: var(--radius-lg);
+  padding: 4rem 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+
+.spinner-lavender {
+  width: 54px;
+  height: 54px;
+  border: 5px solid var(--lavender-light);
+  border-top-color: var(--lavender-main);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin: 0 auto 1.75rem auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 0.6rem;
+}
+
+.loading-desc {
+  font-size: 1rem;
+  color: var(--lavender-dark);
+}
+
+/* ==========================================================================
+   7. 진단 결과 섹션
+   ========================================================================== */
+.result-section {
+  padding: 3rem 0 2rem 0;
+}
+
+.result-main-card {
+  background: var(--bg-card);
+  border: 1px solid var(--lavender-border);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.2rem;
+  box-shadow: var(--shadow-card);
+}
+
+.result-header {
+  text-align: center;
+  margin-bottom: 2.8rem;
+  border-bottom: 1px solid var(--lavender-border);
+  padding-bottom: 2rem;
+}
+
+.result-type-badge {
+  display: inline-block;
+  background: var(--lavender-light);
+  color: var(--lavender-dark);
+  font-size: 0.9rem;
+  font-weight: 800;
+  padding: 0.4rem 1.1rem;
+  border-radius: 30px;
+  margin-bottom: 0.8rem;
+}
+
+.result-pre {
+  display: block;
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+}
+
+.result-type-name {
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: var(--lavender-dark);
+  letter-spacing: -0.8px;
+  margin-bottom: 1rem;
+}
+
+.result-type-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* 밸런스 지수 카드 */
+.score-analysis-wrap {
+  margin-bottom: 2.5rem;
+}
+
+.box-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 1.2rem;
+}
+
+.score-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+
+.score-box {
+  background: var(--lavender-surface);
+  border: 1px solid var(--lavender-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+}
+
+.score-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.6rem;
+}
+
+.score-info strong {
+  color: var(--lavender-dark);
+  font-size: 1.05rem;
+}
+
+.mini-bar-bg {
+  width: 100%;
+  height: 7px;
+  background: #e2e8f0;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 0.65rem;
+}
+
+.mini-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.6s ease;
+}
+
+.mini-bar-fill.oil { background: #f59e0b; }
+.mini-bar-fill.moist { background: #3b82f6; }
+.mini-bar-fill.sens { background: #ec4899; }
+
+.score-comment {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* 추천 vs 주의 성분 카드 */
+.ingredients-dual-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.ing-card {
+  border-radius: var(--radius-md);
+  padding: 1.6rem 1.4rem;
+}
+
+.ing-card.good-card {
+  background: var(--good-bg);
+  border: 1px solid var(--good-border);
+}
+
+.ing-card.bad-card {
+  background: var(--bad-bg);
+  border: 1px solid var(--bad-border);
+}
+
+.ing-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin-bottom: 1.2rem;
+}
+
+.ing-icon {
+  font-size: 1.6rem;
+}
+
+.ing-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 0.2rem;
+}
+
+.good-card .ing-title { color: var(--good-text); }
+.bad-card .ing-title { color: var(--bad-text); }
+
+.ing-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.ing-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.ing-list li {
+  font-size: 0.88rem;
+  line-height: 1.45;
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.ing-list strong {
+  display: block;
+  font-size: 0.92rem;
+  margin-bottom: 0.15rem;
+}
+
+.good-card strong { color: var(--good-tag); }
+.bad-card strong { color: var(--bad-tag); }
+
+/* 스킨케어 루틴 */
+.routine-box {
+  background: var(--lavender-surface);
+  border: 1px solid var(--lavender-border);
+  border-radius: var(--radius-md);
+  padding: 1.6rem;
+  margin-bottom: 2.5rem;
+}
+
+.routine-text {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  line-height: 1.7;
+}
+
+/* 결과 버튼 */
+.result-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btn-share {
+  background: var(--lavender-light);
+  color: var(--lavender-dark);
+  padding: 0.95rem 1.8rem;
+}
+
+.btn-share:hover {
+  background: var(--lavender-border);
+}
+
+.btn-restart {
+  background: var(--lavender-dark);
+  color: #ffffff;
+  padding: 0.95rem 2rem;
+}
+
+.btn-restart:hover {
+  background: #5b21b6;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   8. 6대 피부타입 안내 섹션
+   ========================================================================== */
+.guide-section {
+  padding: 3rem 0;
+}
+
+.guide-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-main);
+  text-align: center;
+  margin-bottom: 1.8rem;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+
+.guide-item {
+  background: #ffffff;
+  border: 1px solid var(--lavender-border);
+  border-radius: var(--radius-md);
+  padding: 1.35rem;
+  transition: var(--transition);
+}
+
+.guide-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--lavender-soft);
+  box-shadow: 0 4px 14px var(--lavender-shadow);
+}
+
+.guide-item .badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 0.6rem;
+}
+
+.badge.dry { background: #ffedd5; color: #c2410c; }
+.badge.oily { background: #fee2e2; color: #b91c1c; }
+.badge.dehy { background: var(--lavender-light); color: var(--lavender-dark); }
+.badge.combo { background: #e0e7ff; color: #3730a3; }
+.badge.sens-dry { background: #fce7f3; color: #be185d; }
+.badge.sens-oily { background: #fef3c7; color: #b45309; }
+
+.guide-item h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  color: var(--text-main);
+}
+
+.guide-item p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   9. 푸터
+   ========================================================================== */
+.footer {
+  background: #2e1065;
+  color: #c4b5fd;
+  padding: 2.5rem 0;
+  margin-top: auto;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.footer-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.footer-note {
+  font-size: 0.8rem;
+  color: #a78bfa;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+.footer-copy {
+  font-size: 0.75rem;
+  color: #8b5cf6;
+  margin-top: 0.5rem;
+}
+
+/* ==========================================================================
+   10. 반응형 미디어 쿼리 (Responsive)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 1.75rem;
+  }
+
+  .intro-card,
+  .quiz-card,
+  .result-main-card {
+    padding: 2rem 1.25rem;
+  }
+
+  .info-badges {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .score-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ingredients-dual-box {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .result-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
